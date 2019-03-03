@@ -74,17 +74,33 @@
 
   </head>
   <body>
-    
+    <div hidden>    
+      <div id="gtdiv" class="label">Georgia Tech</div>
+      <div id="londondiv" class="label">Tower of London</div>
+      <div id="tokyodiv" class="label">Tokyo</div>
+      <div id="sydneydiv" class="label">Sydney Opera House</div>
+      <div id="londonpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+      <div id="tokyopin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+      <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+    </div>
     <button class="change-text">Change text</button>
     <button class="remove-text">Remove text</button>
 
         
     <ar-scene>
-      
+      <a-assets>
+        <img id="buzzpin" src="./buzz-pin.png"/>
+      </a-assets>
      
       <a-sky color="#ECECEC"></a-sky>
       <ar-geopose id="GT" lla="151.215286 -33.856900" userotation="false"> 
         <a-entity id="text" text="value: What's up; width: 25; color: purple; align: center; opacity:1" position="0.010 1.581 -6.647">
+        </a-entity>
+      </ar-geopose>
+      <ar-geopose id="Sydney" lla="151.215286 -33.856900" userotation="false"> 
+         <a-entity fixedsize="20" billboard>
+           <a-entity css-object="div: #sydneypin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+           <a-entity css-object="div: #sydneydiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Sydney Opera House<br>Sydney, Australia<br>It is "></a-entity>
         </a-entity>
       </ar-geopose>
     </ar-scene>
