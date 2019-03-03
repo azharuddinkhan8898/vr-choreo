@@ -15,34 +15,41 @@
     <link rel="stylesheet" href="https://aframe.argonjs.io/resources/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://aframe.argonjs.io/resources/style.css">
     <script>
-      // AFRAME.registerComponent('showdistance', {
-      //   schema: { 
-      //     default: ""
-      //   },
+     $(function(){
+            var arrText = ["Lorem ipsum nisi odio integer\n curabitur amet turpis\nvolutpat arcu a leo velit.", "Mattis ad habitasse luctus\ntaciti phasellus sollicitudin\nlaoreet nisi sagittis.","Ad sociosqu imperdiet\nhendrerit malesuada proin elit\nquam donec justo.", "Et cursus ullamcorper\nmattis taciti habitasse\nphasellus convallis litora \neuismod malesuada arcu.", "Platea magna pellentesque\nvestibulum posuere consequat\nnibh ut quisque laoreet class." ];
+            var currentText = 0;
 
-      //   init: function () {
-      //       this.text = "";
-      //   },
+            $(".change-text").click(function(){
+                changeText(arrText[currentText])
+                currentText = currentText + 1;
+            })
 
-      //   update: function () {
-      //     this.text = this.data;
-      //   },
+            $(".remove-text").click(function(){
+                removeText()
+            })
+            
 
-      //   tick: function (t) {
-      //     var object3D = this.el.parentEl.parentEl.object3D;
-      //     var camera = this.el.sceneEl.camera;
-      //     if (!camera) {return;}
+            function removeText(){
+                $("#text").attr("animation","property: text.opacity; dur: 500;  to: 0").attr("animation__1","property: position; dur: 400;  to:0.010 1.581 -7.647 ");
+            }
 
-      //     var cameraPos = camera.getWorldPosition();
-      //     var thisPos = object3D.getWorldPosition();
-      //     var distance = Math.round(thisPos.distanceTo(cameraPos));
 
-      //     var cssDiv = this.el.getObject3D('div');
-      //     var msg = this.text + distance + " meters away";
-      //     cssDiv.elements[0].innerHTML = msg;
-      //     cssDiv.elements[1].innerHTML = msg;
-      //   }
-      // });
+            function changeText(text){
+                if(arrText[currentText+1] == undefined){
+                    $(".change-text").hide();
+                }
+                $("#text").attr("animation","property: text.opacity; dur: 500;  to: 0").attr("animation__1","property: position; dur: 400;  to:0.010 1.581 -7.647 ");
+                setTimeout(function(){
+                    $("#text").attr("text", "value: "+text+"; width: 25; color: purple; align: center");
+                }, 500)
+                
+                setTimeout(function(){
+                    $("#text").removeAttr("animation");
+                    $("#text").attr("animation","property: text.opacity; dur: 500;  to: 1").attr("animation__1","property: position; dur: 400;  to:0.010 1.581 -6.647 ");
+                }, 500)
+            }
+
+        })
     </script>
     <style>
     body, html{
@@ -67,45 +74,17 @@
 
   </head>
   <body>
-    <div hidden>    
-      <div id="gtdiv" class="label">Georgia Tech</div>
-      <div id="londondiv" class="label">Tower of London</div>
-      <div id="tokyodiv" class="label">Tokyo</div>
-      <div id="sydneydiv" class="label">Sydney Opera House</div>
-      <div id="londonpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-      <div id="tokyopin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-      <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-    </div>
+    
     <button class="change-text">Change text</button>
     <button class="remove-text">Remove text</button>
 
         
     <ar-scene>
-      <a-assets>
-        <img id="buzzpin" src="./buzz-pin.png">
-      </a-assets>
-      <ar-geopose id="GT" lla="-84.394539 33.772501" userotation="false"> 
-         <a-entity fixedsize="20" billboard>
-           <a-plane rotation="0 0 0" width="2.9" height="4" src="#buzzpin" transparent="true" ></a-plane>
-           <a-entity css-object="div: #gtdiv" scale="0.02 0.02 0.02" position="0 4 0" showdistance="Tech Tower @ Georgia Tech<br>Atlanta, GA, USA<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose>
-      <ar-geopose id="London" lla="-0.076057 51.507953" userotation="false"> 
-         <a-entity fixedsize="20" billboard>
-           <a-entity css-object="div: #londonpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
-           <a-entity css-object="div: #londondiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="The Tower of London<br>London, England<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose>
-      <ar-geopose id="Sydney" lla="151.215286 -33.856900" userotation="false"> 
-         <a-entity fixedsize="20" billboard>
-           <a-entity css-object="div: #sydneypin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
-           <a-entity css-object="div: #sydneydiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Sydney Opera House<br>Sydney, Australia<br>It is "></a-entity>
-        </a-entity>
-      </ar-geopose>
-      <ar-geopose id="Tokyo" lla=" 139.752797 35.685138" userotation="false"> 
-         <a-entity fixedsize="20" billboard>
-           <a-entity css-object="div: #tokyopin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
-           <a-entity css-object="div: #tokyodiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Imperial Palace<br>Tokyo, Japan<br>It is "></a-entity>
+      
+     
+      <a-sky color="#ECECEC"></a-sky>
+      <ar-geopose id="GT" lla="151.215286 -33.856900" userotation="false"> 
+        <a-entity id="text" text="value: What's up; width: 25; color: purple; align: center; opacity:1" position="0.010 1.581 -6.647">
         </a-entity>
       </ar-geopose>
     </ar-scene>
