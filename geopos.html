@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <!-- <script src="./script/argon.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="./script/argon-aframe.min.js"></script> -->
+
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/@argonjs/argon@^1.2/dist/argon.js"></script>
+    <script src="https://rawgit.com/argonjs/argon-aframe/master/dist/argon-aframe.js"></script>
+    <script src="https://samples.argonjs.io/resources/lib/CSS3DArgonRenderer.js"></script>
+    <script src="https://samples.argonjs.io/resources/lib/CSS3DArgonHUD.js"></script>
+    <script src="https://aframe.argonjs.io/resources/js/aframe-look-at-component.js"></script>
+    <script>
+
+
+      $(function(){
+          var arrText = ["Lorem ipsum nisi odio integer\n curabitur amet turpis\nvolutpat arcu a leo velit.", "Mattis ad habitasse luctus\ntaciti phasellus sollicitudin\nlaoreet nisi sagittis.","Ad sociosqu imperdiet\nhendrerit malesuada proin elit\nquam donec justo.", "Et cursus ullamcorper\nmattis taciti habitasse\nphasellus convallis litora \neuismod malesuada arcu.", "Platea magna pellentesque\nvestibulum posuere consequat\nnibh ut quisque laoreet class." ];
+          var currentText = 0;
+
+          $(".change-text").click(function(){
+              changeText(arrText[currentText])
+              currentText = currentText + 1;
+          })
+
+          $(".remove-text").click(function(){
+              removeText()
+          })
+          
+
+          function removeText(){
+              $("#text").attr("animation","property: text.opacity; dur: 500;  to: 0").attr("animation__1","property: position; dur: 400;  to:0.010 1.581 -7.647 ");
+          }
+
+
+          function changeText(text){
+              if(arrText[currentText+1] == undefined){
+                  $(".change-text").hide();
+              }
+              $("#text").attr("animation","property: text.opacity; dur: 500;  to: 0").attr("animation__1","property: position; dur: 400;  to:0.010 1.581 -7.647 ");
+              setTimeout(function(){
+                  $("#text").attr("text", "value: "+text+"; width: 25; color: purple; align: center");
+              }, 500)
+              
+              setTimeout(function(){
+                  $("#text").removeAttr("animation");
+                  $("#text").attr("animation","property: text.opacity; dur: 500;  to: 1").attr("animation__1","property: position; dur: 400;  to:0.010 1.581 -6.647 ");
+              }, 500)
+          }
+
+      })
+
+
+  </script>
+    <style>
+    body, html{
+      margin: 0px; padding: 0px;
+    }
+        .change-text, .remove-text{
+            position: absolute;
+            z-index: 21;
+            background: #000;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            left: 10px;
+            top: 10px;
+        }
+        .remove-text{
+            left: unset;
+            right: 10px;
+        }
+    </style>
+
+  </head>
+  <body>
+
+    <button class="change-text">Change text</button>
+    <button class="remove-text">Remove text</button>
+
+        
+    <ar-scene>
+
+      <a-entity id="camera" position="0 1.6 0" camera look-controls camera-logger >
+            <a-entity cursor=""
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat">
+        </a-entity>
+        </a-entity>
+
+       
+        <a-entity id="text" text="value: What's up; width: 25; color: purple; align: center; opacity:1" position="0.010 1.581 -6.647">
+        </a-entity>
+     
+      <a-sky color="#ECECEC"></a-sky>
+
+</ar-scene>
+
+  </body>
+  <!-- <script>
+  // $("#instruction").text("Close the Gap").css("color", "gray") -->
+  <!-- </script> -->
+</html>
