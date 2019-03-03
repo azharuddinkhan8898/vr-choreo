@@ -78,7 +78,7 @@
       <div id="gtdiv" class="label">Georgia Tech</div>
       <div id="londondiv" class="label">Tower of London</div>
       <div id="tokyodiv" class="label">Tokyo</div>
-      <div id="sydneydiv" class="label">Sydney Opera House</div>
+      <div id="sydneydiv" class="label">Text1</div>
       <div id="londonpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
       <div id="tokyopin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
       <div id="sydneypin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
@@ -99,12 +99,12 @@
         </a-entity>
       </a-entity>
       </a-entity>
-      <ar-geopose id="Sydney" lla="151.215286 -33.856900" userotation="false"> 
+      <a-entity id="Sydney" referenceframe="lla:151.215286 -33.856900" userotation="false"> 
          <a-entity fixedsize="20" billboard>
            <a-entity css-object="div: #sydneypin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
            <a-entity css-object="div: #sydneydiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Sydney Opera House<br>Sydney, Australia<br>It is "></a-entity>
         </a-entity>
-      </ar-geopose>
+      </a-entity>
     </ar-scene>
   </body>
   <!-- <script>
