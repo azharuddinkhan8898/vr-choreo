@@ -42,6 +42,41 @@
         }
       });
 
+
+
+
+      var arrText = ["Lorem ipsum nisi odio integer\n curabitur amet turpis\nvolutpat arcu a leo velit.", "Mattis ad habitasse luctus\ntaciti phasellus sollicitudin\nlaoreet nisi sagittis.","Ad sociosqu imperdiet\nhendrerit malesuada proin elit\nquam donec justo.", "Et cursus ullamcorper\nmattis taciti habitasse\nphasellus convallis litora \neuismod malesuada arcu.", "Platea magna pellentesque\nvestibulum posuere consequat\nnibh ut quisque laoreet class." ];
+            var currentText = 0;
+
+            $(".change-text").click(function(){
+                changeText(arrText[currentText])
+                currentText = currentText + 1;
+            })
+
+            $(".remove-text").click(function(){
+                removeText()
+            })
+            
+
+            function removeText(){
+                $("#istructions").animate({"opacity":"0 "}, 300);
+            }
+
+
+            function changeText(text){
+                if(arrText[currentText+1] == undefined){
+                    $(".change-text").hide();
+                }
+                $("#istructions").animate({"opacity":"0 "}, 300, function(){
+                  $("#istructions").text(text);
+                  $("#istructions").animate({"opacity":"1"}, 300)
+                });
+                
+                
+            }
+
+
+
         })
     </script>
     <style>
@@ -63,14 +98,26 @@
             left: unset;
             right: 10px;
         }
+        .inst {
+          opacity: 1;
+
+          font-size: 40px;
+          text-align: center;
+          color: black;
+          
+          border: 0px;
+          margin-bottom: 0px;
+          padding: 0px 0px;
+      }
     </style>
 
   </head>
   <body>
+    <button class="change-text">Change text</button>
+    <button class="remove-text">Remove text</button>
     <div hidden>
-      <div id="mydiv" class="boxface">Argon<br>+<br>AFrame</div>
-      <div id="mydiv2" class="boxface">WebGL<br>+<br>CSS</div>
-      <div id="istructions" class="boxface">Hello</div>
+      
+      <div id="istructions" class="inst"> What's up</div>
     </div>
     <ar-scene sunmoon light="defaultLightsEnabled: false">
 
@@ -78,13 +125,10 @@
         <a-entity id="helloworld" position="0 0 -8">
           
           <a-entity billboard position="0 3 0">
-            <a-entity rotation="0 45 0">
-                    <a-entity css-object="div: #mydiv" scale="0.01 0.01 0.01" rotation="0 0 0" position="0 0 0.5"></a-entity>
-                    <a-entity css-object="div: #mydiv2" scale="0.01 0.01 0.01" rotation="0 -90 0" position="-0.5 0 0"></a-entity>
-            </a-entity>
+
 
             <a-entity rotation="0 0 0">
-                    <a-entity css-object="div: #mydiv" scale="0.01 0.01 0.01" rotation="0 0 0" position="0 0 1"></a-entity>
+                    <a-entity css-object="div: #istructions" scale="0.01 0.01 0.01" rotation="0 0 0" position="0 0 1"></a-entity>
                     
             </a-entity>
           </a-entity>
